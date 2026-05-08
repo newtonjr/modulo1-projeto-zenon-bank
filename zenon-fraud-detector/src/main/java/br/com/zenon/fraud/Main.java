@@ -1,6 +1,7 @@
 package br.com.zenon.fraud;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 public class Main {
     static void main(String[] args) {
@@ -24,5 +25,14 @@ public class Main {
 
         IO.println(transacao01);
         IO.println(transacao02);
+
+
+        IO.println("------------------------------");
+
+        TransactionIngestor transactionIngestor = new TransactionIngestor();
+        List<Transaction> listTrans = transactionIngestor.readFile("data/PS_20174392719_1491204439457_log.csv");
+        IO.println(listTrans.size());
+
+        listTrans.stream().limit(10).forEach(IO::println);
     }
 }
