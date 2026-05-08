@@ -10,11 +10,13 @@ import java.util.logging.Logger;
 public class TransactionIngestor {
     public static final Logger logger = Logger.getLogger(TransactionIngestor.class.getName());
 
+    public static final int TOTAL_LIMIT = 50_000;
+
     public List<Transaction> readFile(String filename) {
         Path path = Path.of(filename);
         try {
             List<String> lines = Files.readAllLines(path);
-            return lines.stream().skip(1).limit(1000).map(this::parseLine)
+            return lines.stream().skip(1).limit(TOTAL_LIMIT).map(this::parseLine)
                     .filter(Optional::isPresent).map(Optional::get).toList();
         } catch (Exception e) {
             throw new RuntimeException("Ocorreu um erro ao ler o arquivo: " + filename);
