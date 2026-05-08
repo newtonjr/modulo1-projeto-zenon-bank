@@ -34,5 +34,12 @@ public class Main {
         IO.println(listTrans.size());
 
         listTrans.stream().limit(10).forEach(IO::println);
+
+        IO.println("------------------------------");
+
+        List<Transaction> listTrans2 = transactionIngestor.readFile("data/paysim_with_bad_data.csv");
+        IO.println(listTrans2.size());
+
+        listTrans2.stream().forEach(IO::println);
     }
 }
