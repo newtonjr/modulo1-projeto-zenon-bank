@@ -3,6 +3,7 @@ package br.com.zenon.fraud;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 public class Main {
     static void main(String[] args) {
@@ -64,5 +65,33 @@ public class Main {
         Map<TransactionType, Long> fraudCountByType = fraudAnalyzer.countFraudsByType();
         IO.println("5. Fraudes por tipo:");
         fraudCountByType.forEach((type, count) -> IO.println("- %s: %d".formatted(type, count)));
+
+        IO.println("------------------------------");
+
+        TransactionRepository transactionListRepository = new TransactionListRepository(listTrans);
+
+        transactionListRepository.getCustomerByName("C1231006815");
+        transactionListRepository.getCustomerByName("C12345");
+
+        IO.println("------------------------------");
+
+        Long ini = System.nanoTime();
+
+        transactionListRepository.getCustomerByName("C1868032458");
+
+        Long total = System.nanoTime() - ini;
+        IO.println("Total de tempo de busca foi: " + total);
+
+
+        IO.println("------------------------------");
+
+        TransactionRepository transactionMapRepository = new TransactionMapRepository(listTrans);
+        ini = System.nanoTime();
+
+        transactionMapRepository.getCustomerByName("C1868032458");
+
+        total = System.nanoTime() - ini;
+        IO.println("Total de tempo de busca foi: " + total);
+
     }
 }

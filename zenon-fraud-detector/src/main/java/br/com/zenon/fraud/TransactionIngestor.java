@@ -10,7 +10,7 @@ import java.util.logging.Logger;
 public class TransactionIngestor {
     public static final Logger logger = Logger.getLogger(TransactionIngestor.class.getName());
 
-    public static final int TOTAL_LIMIT = 50_000;
+    public static final int TOTAL_LIMIT = 100_000;
 
     public List<Transaction> readFile(String filename) {
         Path path = Path.of(filename);
