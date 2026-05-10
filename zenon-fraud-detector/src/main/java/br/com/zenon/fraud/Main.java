@@ -3,7 +3,6 @@ package br.com.zenon.fraud;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 public class Main {
     static void main(String[] args) {
