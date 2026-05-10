@@ -20,4 +20,9 @@ public class TransactionListRepository implements TransactionRepository {
         }
         return result;
     }
+
+    @Override
+    public void save(Transaction item) {
+        transactions.add(item);
+    }
 }

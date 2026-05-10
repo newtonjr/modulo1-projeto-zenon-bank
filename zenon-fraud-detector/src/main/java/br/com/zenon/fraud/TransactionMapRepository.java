@@ -23,4 +23,9 @@ public class TransactionMapRepository implements TransactionRepository {
         }
         return result;
     }
+
+    @Override
+    public void save(Transaction item) {
+        transactions.put(item.orig().name(), item);
+    }
 }
