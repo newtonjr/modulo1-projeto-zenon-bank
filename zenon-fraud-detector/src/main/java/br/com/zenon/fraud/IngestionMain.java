@@ -2,23 +2,19 @@ package br.com.zenon.fraud;
 
 import java.util.List;
 
-public class DBMain {
+public class IngestionMain {
     void main() {
         ConnectionFactory.getConnection();
         IO.println("Conexão com o DB criada!");
 
         var repository = new TransactionSQLRepository();
 
-        var transactionIngestor = new TransactionIngestor();
-
-        long startTimeSQL = System.nanoTime();
-        List<Transaction> transactions = transactionIngestor.readFile("data/PS_20174392719_1491204439457_log.csv");
-
-        IO.println(transactions.size());
+        var efficientTransactionIngestor = new EfficientTransactionIngestor();
 
         IO.println("Iniciando adicao das transacoes no BD...");
-//        transactions.forEach(repository::save);
-        repository.save(transactions);
+        long startTimeSQL = System.nanoTime();
+
+        efficientTransactionIngestor.readAsBatch("data/PS_20174392719_1491204439457_log.csv", repository::save);
 
         long endTimeSQL = System.nanoTime();
         IO.println("Tempo de inserção - SQL (ms): " + (endTimeSQL - startTimeSQL) / 1_000_000.0);

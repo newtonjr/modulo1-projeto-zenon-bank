@@ -28,4 +28,9 @@ public class TransactionMapRepository implements TransactionRepository {
     public void save(Transaction item) {
         transactions.put(item.orig().name(), item);
     }
+
+    @Override
+    public void save(List<Transaction> itens) {
+        transactions.putAll(itens.stream().collect(Collectors.toMap(t -> t.orig().name(), Function.identity())));
+    }
 }
